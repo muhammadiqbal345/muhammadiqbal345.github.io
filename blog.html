@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog Pribadi - Muhammad Iqbal Tawakkal</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary-accent: #3b82f6;
+            --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            --secondary-gradient: linear-gradient(135deg, #10b981 0%, #047857 100%);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 110px; /* Offsets scroll position to prevent navbar from blocking section headers */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            overflow-x: hidden;
+        }
+
+        section {
+            scroll-margin-top: 110px;
+        }
+
+        /* Glassmorphic Navbar */
+        .navbar {
+            background-color: rgba(11, 15, 25, 0.8) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-link {
+            color: var(--text-muted) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-main) !important;
+        }
+
+        /* Blog Header */
+        header {
+            position: relative;
+            background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.12) 0%, transparent 65%);
+            padding: 80px 0 40px 0;
+        }
+
+        .blog-badge {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary-accent);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.4rem 1rem;
+            border-radius: 50rem;
+            display: inline-block;
+        }
+
+        /* Category Filter Pills */
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Glassmorphic Cards */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            border-radius: 1.25rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-outline-custom {
+            border: 1px solid var(--primary-accent);
+            color: var(--text-main);
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        /* Search input styling */
+        .input-group.search-group {
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            background-color: rgba(255, 255, 255, 0.03);
+            overflow: hidden;
+        }
+        
+        :root[data-theme="light"] .input-group.search-group {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+
+        .input-group.search-group .input-group-text,
+        .input-group.search-group .form-control {
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            color: var(--text-main);
+        }
+
+        .input-group.search-group .input-group-text {
+            color: var(--text-muted) !important;
+            padding-left: 1rem;
+            padding-right: 0.5rem;
+        }
+
+        .input-group.search-group .form-control {
+            padding-left: 0.5rem;
+        }
+
+        .input-group.search-group:focus-within {
+            border-color: var(--primary-accent);
+            background-color: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+        }
+        
+        :root[data-theme="light"] .input-group.search-group:focus-within {
+            background-color: rgba(0, 0, 0, 0.04);
+        }
+
+        /* Modal styling */
+        .modal-content {
+            background-color: #0f172a;
+            border: 1px solid var(--border-color);
+            border-radius: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-footer {
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #070a12;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        /* Theme Toggle Styling */
+        #theme-toggle {
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        #theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        :root[data-theme="light"] #theme-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Light Theme Overrides */
+        :root[data-theme="light"] {
+            --bg-color: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --border-color: rgba(15, 23, 42, 0.08);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+        :root[data-theme="light"] body {
+            color: #0f172a !important;
+        }
+        :root[data-theme="light"] .text-white {
+            color: #0f172a !important;
+        }
+        :root[data-theme="light"] .text-secondary {
+            color: #475569 !important;
+        }
+        :root[data-theme="light"] .card-title {
+            color: #0f172a !important;
+        }
+        :root[data-theme="light"] .navbar-brand {
+            color: #0f172a !important;
+        }
+        :root[data-theme="light"] .navbar {
+            background-color: rgba(248, 250, 252, 0.8) !important;
+        }
+        :root[data-theme="light"] footer {
+            background-color: #f1f5f9;
+        }
+        :root[data-theme="light"] .form-control {
+            background-color: rgba(0, 0, 0, 0.02);
+            color: #0f172a;
+        }
+        :root[data-theme="light"] .form-control:focus {
+            background-color: rgba(0, 0, 0, 0.04);
+            color: #0f172a;
+        }
+        :root[data-theme="light"] .modal-content {
+            background-color: #ffffff;
+            color: #0f172a;
+        }
+        :root[data-theme="light"] .modal-header .btn-close {
+            filter: none;
+        }
+
+        .animate-spin {
+            animation: spin 8s linear infinite;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand fs-3" href="index.html"><span class="text-primary">Iqbal</span> Portofolio</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <button id="theme-toggle" class="btn btn-link text-secondary ms-lg-3" aria-label="Toggle Theme">
+                            <i id="theme-icon" class="bi bi-moon-stars"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <a href="index.html#contact" class="btn btn-outline-custom rounded-pill px-4 ms-3 d-none d-lg-inline-block">Kontak Saya</a>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <header class="text-center">
+        <div class="container">
+            <h1 class="display-4 fw-extrabold text-white mb-3">Cerita Tentang Saya</h1>
+            <p class="fs-5 text-secondary max-w-2xl mx-auto">Selamat datang! Halaman ini didedikasikan untuk menceritakan kegiatan, hobi, dan kontribusi saya di dunia digital.</p>
+        </div>
+    </header>
+
+    <!-- Blog Container -->
+    <main class="container py-4 mb-5">
+        <!-- Search Bar -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-6 col-lg-5">
+                <div class="input-group search-group">
+                    <span class="input-group-text"><i class="bi bi-search"></i></span>
+                    <input type="text" id="search-input" class="form-control" placeholder="Cari artikel..." onkeyup="searchArticles()">
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog Posts Grid -->
+        <div class="row g-4" id="blog-grid">
+            <!-- Article Cards (Rendered Dynamically via JS) -->
+        </div>
+    </main>
+
+    <!-- Article Detail Modal -->
+    <div class="modal fade" id="articleModal" tabindex="-1" aria-labelledby="articleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span id="modal-category" class="badge bg-primary me-2">Kategori</span>
+                    <h5 class="modal-title fw-bold" id="articleModalLabel">Judul Artikel</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modal-img" src="" alt="Gambar Artikel" class="img-fluid rounded-3 mb-4 w-100 object-fit-cover" style="height: 350px;">
+                    <div id="modal-meta" class="text-secondary small mb-3">
+                        <i class="bi bi-calendar3 me-2"></i><span id="modal-date">Tanggal</span> &bull; 
+                        <i class="bi bi-clock me-2"></i><span id="modal-read-time">Waktu Baca</span>
+                    </div>
+                    <div id="modal-body-content" class="fs-5 leading-relaxed text-secondary">
+                        <!-- Content -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-5 mt-auto">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Muhammad Iqbal Tawakkal. Dilarang menyalin tanpa izin tertulis dari pemilik.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script>
+        // Article dataset
+        const articles = [
+            {
+                id: 1,
+                title: "Siapakah Muhammad Iqbal Tawakkal?",
+                category: "profil",
+                categoryLabel: "Profil Saya",
+                date: "06 Juli 2026",
+                readTime: "3 menit baca",
+                desc: "Kenali lebih dekat diri saya sebagai pembuat website pemula, pemengaruh, serta penghobi journaling dan literasi digital.",
+                image: "./gambar/Foto_pribadi.jpg",
+                content: `
+                    <p>Halo, nama saya <strong>Muhammad Iqbal Tawakkal</strong>. Saya adalah seorang pemengaruh (influencer) sekaligus pembuat website yang belajar secara mandiri dengan bantuan kecerdasan buatan dari Antigravity IDE.</p>
+                    <p>Selain fokus merancang tampilan web sederhana dan responsif, saya juga senang menulis buku harian pribadi (journaling) untuk mendokumentasikan ide, pemikiran, dan refleksi hidup. Saya percaya bahwa dunia digital adalah ruang tanpa batas untuk terus berkreasi dan belajar.</p>
+                    <p>Situs portfolio dan blog ini dibuat khusus sebagai ruang pameran hasil karya serta catatan perjalanan karir kreatif saya.</p>
+                `
+            },
+            {
+                id: 2,
+                title: "Pengalaman Menyunting Ensiklopedia Wikipedia Indonesia",
+                category: "wikipedia",
+                categoryLabel: "Wikipedia",
+                date: "30 Juni 2026",
+                readTime: "4 menit baca",
+                desc: "Kisah saya berkontribusi di komunitas Wikipedia Indonesia menggunakan akun pengguna Great_achievement.",
+                image: "./gambar/orang kerja.jpg",
+                content: `
+                    <p>Menyunting artikel di Wikipedia merupakan salah satu kegiatan utama yang sangat saya gemari. Melalui akun pengguna Wikipedia saya, <a href="https://id.wikipedia.org/wiki/Pengguna:Great_achievement" target="_blank" class="text-primary">Great_achievement</a>, saya aktif berkontribusi menyempurnakan artikel, merapikan format, dan melengkapi informasi rujukan ilmiah.</p>
+                    <p>Bagi saya, berkontribusi di Wikipedia adalah cara terbaik untuk membagikan ilmu pengetahuan secara gratis kepada masyarakat luas. Hal ini juga melatih cara berpikir objektif, kemampuan riset mendalam, serta kepatuhan terhadap lisensi hak cipta digital.</p>
+                `
+            },
+            {
+                id: 3,
+                title: "Aktivitas Kreatif: Menulis Buku, Mengedit Video, dan Membuat Meme",
+                category: "kegiatan",
+                categoryLabel: "Kegiatan Kreatif",
+                date: "20 Juni 2026",
+                readTime: "5 menit baca",
+                desc: "Menyalurkan ide melalui tulisan buku, produksi konten visual video editing, hingga humor digital lewat meme.",
+                image: "./gambar/gambar2.avif",
+                content: `
+                    <p>Menjadi produktif di internet memerlukan berbagai medium ekspresi. Di luar aktivitas coding dan menulis artikel, saya menyibukkan diri dengan beberapa kegiatan kreatif lainnya:</p>
+                    <ul>
+                        <li><strong>Menulis Buku:</strong> Mengembangkan naskah tulisan untuk dibagikan kepada audiens pembaca.</li>
+                        <li><strong>Mengedit Video:</strong> Memproses potongan video mentah, menyesuaikan transisi, suara, dan teks agar konten terlihat lebih profesional.</li>
+                        <li><strong>Membuat Meme:</strong> Mengolah humor internet yang segar dan relevan sebagai jembatan komunikasi yang santai dengan komunitas saya di platform media sosial seperti X.</li>
+                    </ul>
+                    <p>Anda juga dapat berinteraksi langsung dengan saya melalui akun X pribadi di <a href="https://x.com/i/@p_o_berubah" target="_blank" class="text-primary">@p_o_berubah</a>.</p>
+                `
+            },
+            {
+                id: 4,
+                title: "Kecintaan Terhadap Kucing (Fascinating Felines)",
+                category: "hobi",
+                categoryLabel: "Hobi",
+                date: "15 Juni 2026",
+                readTime: "3 menit baca",
+                desc: "Mengapa kucing menjadi salah satu inspirasi harian saya dalam hidup maupun bekerja.",
+                image: "./gambar/gambar3.avif",
+                content: `
+                    <p>Kucing adalah salah satu hewan favorit yang selalu menemani hari-hari saya. Tingkah lakunya yang lucu, menggemaskan, dan kadang misterius memberikan hiburan tersendiri di sela-sela kesibukan bekerja di depan komputer.</p>
+                    <p>Mulai dari memelihara kucing secara langsung hingga mengumpulkan gambar-gambar kucing lucu (seperti kucing muslim, kucing mengantuk, dan meme kucing), kehadiran mereka selalu membawa energi positif dan ide-ide kreatif baru saat saya mendesain website.</p>
+                `
+            }
+        ];
+
+        let activeCategory = 'all';
+
+        // Render articles on grid
+        function renderArticles(list) {
+            const grid = document.getElementById('blog-grid');
+            grid.innerHTML = '';
+            
+            if (list.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="bi bi-journal-x fs-1 text-secondary"></i>
+                        <p class="text-secondary mt-3">Tidak ada artikel yang cocok ditemukan.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            list.forEach(article => {
+                const card = `
+                    <div class="col-md-6 article-card" data-category="${article.category}">
+                        <div class="glass-card card h-100 overflow-hidden">
+                            <img src="${article.image}" style="height: 240px; object-fit: cover;" class="card-img-top" alt="${article.title}">
+                            <div class="card-body p-4 d-flex flex-column">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill small">${article.categoryLabel}</span>
+                                    <span class="text-secondary small">${article.readTime}</span>
+                                </div>
+                                <h4 class="card-title text-white mb-3 fw-bold">${article.title}</h4>
+                                <p class="card-text text-secondary mb-4 flex-grow-1">${article.desc}</p>
+                                <button onclick="openArticle(${article.id})" class="btn btn-outline-custom w-100 rounded-pill mt-auto">Baca Selengkapnya</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                grid.innerHTML += card;
+            });
+        }
+
+        // Filter category
+        window.filterCategory = function(category) {
+            activeCategory = category;
+            
+            // Update active pill button state
+            const buttons = document.querySelectorAll('#filter-container .filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            const categoryBtnMap = {
+                'all': 0,
+                'profil': 1,
+                'wikipedia': 2,
+                'kegiatan': 3,
+                'hobi': 4
+            };
+            
+            if (buttons[categoryBtnMap[category]]) {
+                buttons[categoryBtnMap[category]].classList.add('active');
+            }
+
+            applyFilters();
+        };
+
+        // Search articles
+        window.searchArticles = function() {
+            applyFilters();
+        };
+
+        // Apply search & category filters together
+        function applyFilters() {
+            const query = document.getElementById('search-input').value.toLowerCase().trim();
+            
+            const filtered = articles.filter(article => {
+                const matchesCategory = (activeCategory === 'all' || article.category === activeCategory);
+                const matchesSearch = article.title.toLowerCase().includes(query) || article.desc.toLowerCase().includes(query);
+                return matchesCategory && matchesSearch;
+            });
+
+            renderArticles(filtered);
+        }
+
+        // Open detailed article in modal
+        window.openArticle = function(id) {
+            const article = articles.find(a => a.id === id);
+            if (article) {
+                document.getElementById('modal-category').textContent = article.categoryLabel;
+                document.getElementById('articleModalLabel').textContent = article.title;
+                document.getElementById('modal-img').src = article.image;
+                document.getElementById('modal-date').textContent = article.date;
+                document.getElementById('modal-read-time').textContent = article.readTime;
+                document.getElementById('modal-body-content').innerHTML = article.content;
+                
+                // Show modal
+                const myModal = new bootstrap.Modal(document.getElementById('articleModal'));
+                myModal.show();
+            }
+        };
+
+        // Initial render
+        renderArticles(articles);
+
+        // Dark/Light Mode Theme Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        // Load saved theme or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+
+        if (themeToggleBtn) {
+            themeToggleBtn.addEventListener('click', () => {
+                let theme = document.documentElement.getAttribute('data-theme');
+                let newTheme = theme === 'dark' ? 'light' : 'dark';
+
+                document.documentElement.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeIcon(newTheme);
+            });
+        }
+
+        function updateThemeIcon(theme) {
+            if (theme === 'light') {
+                if (themeIcon) themeIcon.className = 'bi bi-sun-fill';
+                if (themeToggleBtn) themeToggleBtn.className = 'btn btn-link text-warning ms-lg-3';
+            } else {
+                if (themeIcon) themeIcon.className = 'bi bi-moon-stars';
+                if (themeToggleBtn) themeToggleBtn.className = 'btn btn-link text-secondary ms-lg-3';
+            }
+        }
+    </script>
+</body>
+
+</html>

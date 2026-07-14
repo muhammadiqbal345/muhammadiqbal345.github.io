@@ -1,0 +1,892 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Muhammad Iqbal Tawakkal - Portfolio</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --primary-accent: #3b82f6;
+            --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            --secondary-gradient: linear-gradient(135deg, #10b981 0%, #047857 100%);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 110px; /* Offsets scroll position to prevent navbar from blocking section headers */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-family);
+            overflow-x: hidden;
+        }
+
+        section {
+            scroll-margin-top: 110px;
+        }
+
+        /* Glassmorphic Navbar */
+        .navbar {
+            background-color: rgba(11, 15, 25, 0.8) !important;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-link {
+            color: var(--text-muted) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-main) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background-color: var(--primary-accent);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 80%;
+        }
+
+        /* Hero Section */
+        header {
+            position: relative;
+            background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .hero-title span {
+            background: linear-gradient(to right, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-gradient {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+            color: white;
+        }
+
+        .btn-outline-custom {
+            border: 1px solid var(--primary-accent);
+            color: var(--text-main);
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+            color: white;
+        }
+
+        .hero-img-wrapper {
+            position: relative;
+        }
+
+        .hero-img-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid var(--primary-accent);
+            border-radius: 2rem;
+            z-index: -1;
+            opacity: 0.3;
+            transition: all 0.3s ease;
+        }
+
+        .hero-img-wrapper:hover::before {
+            transform: translate(10px, 10px);
+            opacity: 0.6;
+        }
+
+        /* Glassmorphic Cards */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            border-radius: 1.25rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Icons styling */
+        .icon-circle {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover .icon-circle {
+            transform: scale(1.1);
+        }
+
+        /* Custom Section Titles */
+        .section-title {
+            position: relative;
+            font-weight: 800;
+            letter-spacing: -1px;
+            margin-bottom: 1rem;
+        }
+
+        .section-title span {
+            background: linear-gradient(to right, #3b82f6, #10b981);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Input Styling */
+        .form-control,
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            border-radius: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #070a12;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        /* Theme Toggle Styling */
+        #theme-toggle {
+            cursor: pointer;
+            font-size: 1.25rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        #theme-toggle:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        :root[data-theme="light"] #theme-toggle:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        /* Light Theme Overrides */
+        :root[data-theme="light"] {
+            --bg-color: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.8);
+            --border-color: rgba(15, 23, 42, 0.08);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+        }
+
+        :root[data-theme="light"] body {
+            color: #0f172a !important;
+        }
+
+        :root[data-theme="light"] .text-white {
+            color: #0f172a !important;
+        }
+
+        :root[data-theme="light"] .text-white-50 {
+            color: #334155 !important;
+        }
+
+        :root[data-theme="light"] .text-secondary {
+            color: #475569 !important;
+        }
+
+        :root[data-theme="light"] .card-title {
+            color: #0f172a !important;
+        }
+
+        :root[data-theme="light"] .navbar-brand {
+            color: #0f172a !important;
+        }
+
+        :root[data-theme="light"] .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        :root[data-theme="light"] header {
+            background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 20% 80%, rgba(16, 185, 129, 0.06) 0%, transparent 50%);
+        }
+
+        :root[data-theme="light"] .navbar {
+            background-color: rgba(248, 250, 252, 0.8) !important;
+        }
+
+        :root[data-theme="light"] footer {
+            background-color: #f1f5f9;
+        }
+
+        :root[data-theme="light"] .form-control {
+            background-color: rgba(0, 0, 0, 0.02);
+            color: #0f172a;
+        }
+
+        :root[data-theme="light"] .form-control:focus {
+            background-color: rgba(0, 0, 0, 0.04);
+            color: #0f172a;
+        }
+
+        :root[data-theme="light"] .bg-light {
+            background-color: #f1f5f9 !important;
+        }
+
+        /* Timeline Styles */
+        .timeline-row {
+            position: relative;
+        }
+
+        .timeline-row::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary-accent);
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
+
+        @media (max-width: 767.98px) {
+            .timeline-row::before {
+                left: 15px;
+            }
+
+            #timeline .position-absolute.start-50 {
+                left: 15px !important;
+            }
+
+            .timeline-row {
+                text-align: left !important;
+                padding-left: 40px;
+            }
+
+            .timeline-row .col-md-6 {
+                text-align: left !important;
+            }
+        }
+
+        .animate-spin {
+            animation: spin 8s linear infinite;
+        }
+
+        @keyframes spin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top py-3">
+        <div class="container">
+            <a class="navbar-brand fs-3" href="#"><span class="text-primary">Iqbal</span> Portofolio</a>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tentang">Tentang Saya</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#layanan">Layanan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portofolio">Portofolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Kontak</a>
+                    </li>
+                    <li class="nav-item">
+                        <button id="theme-toggle" class="btn btn-link text-secondary ms-lg-3" aria-label="Toggle Theme">
+                            <i id="theme-icon" class="bi bi-moon-stars"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="d-flex align-items-center">
+        <div class="container py-5">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h5 class="text-primary text-uppercase tracking-wider fw-bold mb-3">Selamat datang di portofolio
+                        saya</h5>
+                    <h1 class="hero-title display-4 fw-extrabold mb-3">
+                        Halo, Saya <br><span>Muhammad Iqbal Tawakkal</span>
+                    </h1>
+                    <h3 class="fs-4 text-white-50 mb-4">Seorang pembuat web & content creator.</h3>
+                    <p class="text-secondary fs-5 mb-5">
+                        Saya merupakan pembuat web yang berfokus menciptakan solusi web sederhana, interaktif, dan
+                        berkinerja tinggi sesuai kebutuhan Anda.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="#contact" class="btn btn-gradient btn-lg px-4 py-3 rounded-pill">Hubungi Saya</a>
+                        <a href="#portofolio" class="btn btn-outline-custom btn-lg px-4 py-3 rounded-pill">Lihat
+                            Portofolio</a>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-flex justify-content-center">
+                    <div class="hero-img-wrapper">
+                        <img src="./gambar/Foto_pribadi.jpg" alt="Foto pribadi"
+                            class="img-fluid object-fit-cover rounded-5 shadow-lg" style="width: 320px; height: 420px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tentang Saya Section -->
+    <section id="tentang" class="py-5 my-5">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-5 text-center text-lg-start">
+                    <img src="./gambar/orang kerja 2.jpg" alt="orang kerja"
+                        style="width: 100%; max-width: 400px; height: 350px; object-fit: cover;"
+                        class="rounded-5 shadow-lg">
+                </div>
+                <div class="col-lg-7">
+                    <h2 class="section-title display-5">
+                        Tentang <span>Saya</span>
+                    </h2>
+                    <p class="fs-5 text-secondary mt-4 leading-relaxed">
+                        Saya adalah seorang pemengaruh dan pembuat web dengan bantuan Antigravity IDE.
+                        Fokus utama saya adalah membangun tampilan digital yang profesional dan memikat.
+                        Saya berdedikasi untuk terus mengeksplorasi teknologi web terbaru guna menghadirkan kualitas
+                        terbaik pada setiap proyek.
+                    </p>
+                
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section id="timeline" class="py-5">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="section-title display-5">
+                    Perjalanan <span>Kreatif</span>
+                </h2>
+                <p class="fs-5 text-secondary">Milestone penting dalam kontribusi digital dan perjalanan karir saya</p>
+            </div>
+
+            <div class="position-relative">
+                <!-- Line in the middle -->
+                <div class="position-absolute start-50 translate-middle-x h-100 bg-secondary opacity-25"
+                    style="width: 2px; top: 0;"></div>
+
+                <div class="row g-4 timeline-row align-items-center mb-5 opacity-0 translate-y-3"
+                    style="transition: all 0.6s ease;">
+                    <div class="col-md-6 text-md-end pe-md-5">
+                        <span class="text-primary fw-bold fs-4">2023 - Sekarang</span>
+                        <h4 class="text-white mt-2">Menyunting di Wikipedia</h4>
+                        <p class="text-secondary mt-2">Aktif menyunting artikel sains, sejarah, dan profil kebudayaan di
+                            Wikipedia Bahasa Indonesia dengan akun <a
+                                href="https://id.wikipedia.org/wiki/Pengguna:Great_achievement" target="_blank"
+                                class="text-primary">Great_achievement</a>.</p>
+                    </div>
+                    <div class="col-md-6 ps-md-5">
+                        <div class="glass-card card p-3 d-inline-block">
+                            <i class="bi bi-book fs-3 text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 timeline-row align-items-center mb-5 opacity-0 translate-y-3"
+                    style="transition: all 0.6s ease;">
+                    <div class="col-md-6 order-md-2 text-md-start ps-md-5">
+                        <span class="text-success fw-bold fs-4">2024 - Sekarang</span>
+                        <h4 class="text-white mt-2">Berbagi Opini di Platform X</h4>
+                        <p class="text-secondary mt-2">Aktif menyuarakan pandangan seputar literasi digital, tren
+                            teknologi, dan berbagi lelucon kreatif di akun X <a href="https://x.com/i/@p_o_berubah"
+                                target="_blank" class="text-success">@p_o_berubah</a>.</p>
+                    </div>
+                    <div class="col-md-6 order-md-1 text-md-end pe-md-5">
+                        <div class="glass-card card p-3 d-inline-block">
+                            <i class="bi bi-twitter-x fs-3 text-success"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 timeline-row align-items-center mb-5 opacity-0 translate-y-3"
+                    style="transition: all 0.6s ease;">
+                    <div class="col-md-6 text-md-end pe-md-5">
+                        <span class="text-danger fw-bold fs-4">2025</span>
+                        <h4 class="text-white mt-2">Produksi Video & Buku</h4>
+                        <p class="text-secondary mt-2">Mulai mendalami proses penyuntingan video (video editing) untuk
+                            media sosial serta menyusun jurnal penulisan buku pribadi.</p>
+                    </div>
+                    <div class="col-md-6 ps-md-5">
+                        <div class="glass-card card p-3 d-inline-block">
+                            <i class="bi bi-scissors fs-3 text-danger"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-4 timeline-row align-items-center opacity-0 translate-y-3"
+                    style="transition: all 0.6s ease;">
+                    <div class="col-md-6 order-md-2 text-md-start ps-md-5">
+                        <span class="text-primary fw-bold fs-4">2026</span>
+                        <h4 class="text-white mt-2">Pengembangan Web Portfolio</h4>
+                        <p class="text-secondary mt-2">Membangun situs portfolio & blog pribadi modern ini menggunakan
+                            HTML, CSS, Bootstrap 5, dan Antigravity IDE.</p>
+                    </div>
+                    <div class="col-md-6 order-md-1 text-md-end pe-md-5">
+                        <div class="glass-card card p-3 d-inline-block">
+                            <i class="bi bi-cpu fs-3 text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Layanan Section -->
+    <section id="layanan" class="py-5" style="background: rgba(255,255,255,0.01);">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="section-title display-5">
+                    Layanan <span>Keahlian</span>
+                </h2>
+                <p class="fs-5 text-secondary">Berikut adalah keahlian yang dapat saya hadirkan untuk proyek Anda</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="glass-card card h-100 p-4 text-center">
+                        <div class="card-body">
+                            <div class="icon-circle mb-4">
+                                <i class="bi bi-code-slash text-primary fs-2"></i>
+                            </div>
+                            <h4 class="card-title text-white mb-3">Web Development</h4>
+                            <p class="card-text text-secondary">
+                                Pembuatan website responsif, cepat, dan modern disesuaikan dengan kebutuhan personal
+                                atau bisnis Anda.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="glass-card card h-100 p-4 text-center">
+                        <div class="card-body">
+                            <div class="icon-circle mb-4">
+                                <i class="bi bi-twitter-x text-success fs-2"></i>
+                            </div>
+                            <h4 class="card-title text-white mb-3">Social Media Content</h4>
+                            <p class="card-text text-secondary">
+                                Perencanaan dan pembuatan konten media sosial yang menarik untuk meningkatkan engagement
+                                audiens Anda.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="glass-card card h-100 p-4 text-center">
+                        <div class="card-body">
+                            <div class="icon-circle mb-4">
+                                <i class="bi bi-scissors text-danger fs-2"></i>
+                            </div>
+                            <h4 class="card-title text-white mb-3">Editing Video</h4>
+                            <p class="card-text text-secondary">
+                                Penyuntingan video profesional dengan pemotongan presisi, transisi mulus, dan visual
+                                yang dinamis.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portofolio Section -->
+    <section id="portofolio" class="py-5">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="section-title display-5">
+                    Portofolio <span>Terbaru</span>
+                </h2>
+                <p class="fs-5 text-secondary">Beberapa proyek pilihan yang telah saya selesaikan</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="glass-card card h-100 overflow-hidden">
+                        <img src="./gambar/gambar1.avif" style="height: 250px; object-fit: cover;" class="card-img-top"
+                            alt="Portofolio 1">
+                        <div class="card-body p-4">
+                            <h5 class="card-title text-white mb-3">Situs E-Commerce Sederhana</h5>
+                            <p class="card-text text-secondary mb-4">Desain dan pengembangan toko online interaktif
+                                dengan navigasi yang mudah bagi pengguna.</p>
+                            <a href="detail-proyek.html?id=1" class="btn btn-outline-custom w-100 rounded-pill">Detail
+                                Proyek</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card card h-100 overflow-hidden">
+                        <img src="./gambar/gambar2.avif" style="height: 250px; object-fit: cover;" class="card-img-top"
+                            alt="Portofolio 2">
+                        <div class="card-body p-4">
+                            <h5 class="card-title text-white mb-3">Desain Landing Page Kreatif</h5>
+                            <p class="card-text text-secondary mb-4">Pembuatan landing page dengan konversi tinggi dan
+                                tata letak minimalis yang menarik.</p>
+                            <a href="detail-proyek.html?id=2" class="btn btn-outline-custom w-100 rounded-pill">Detail
+                                Proyek</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card card h-100 overflow-hidden">
+                        <img src="./gambar/gambar3.avif" style="height: 250px; object-fit: cover;" class="card-img-top"
+                            alt="Portofolio 3">
+                        <div class="card-body p-4">
+                            <h5 class="card-title text-white mb-3">Aplikasi Web Interaktif</h5>
+                            <p class="card-text text-secondary mb-4">Aplikasi web dinamis dengan integrasi API untuk
+                                menyajikan data secara real-time.</p>
+                            <a href="detail-proyek.html?id=3" class="btn btn-outline-custom w-100 rounded-pill">Detail
+                                Proyek</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak Section -->
+    <section id="contact" class="py-5" style="background: rgba(255,255,255,0.01);">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <h2 class="section-title display-5">
+                    Kontak <span>Saya</span>
+                </h2>
+                <p class="fs-5 text-secondary">Jangan ragu untuk menghubungi saya untuk kolaborasi atau proyek</p>
+            </div>
+
+            <div class="row g-4 align-items-stretch">
+                <div class="col-lg-5">
+                    <div class="glass-card card h-100 p-4">
+                        <div class="card-body">
+                            <h4 class="card-title text-white mb-4">Informasi Kontak</h4>
+
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="icon-circle ms-0 me-3"
+                                    style="width: 50px; height: 50px; background: rgba(59, 130, 246, 0.1);">
+                                    <i class="bi bi-envelope text-primary fs-5"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 text-white fw-bold">Email</h6>
+                                    <span class="text-secondary small">muhammadiqbaltawakkal3@gmail.com</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="icon-circle ms-0 me-3"
+                                    style="width: 50px; height: 50px; background: rgba(16, 185, 129, 0.1);">
+                                    <i class="bi bi-telephone text-success fs-5"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 text-white fw-bold">Telepon</h6>
+                                    <span class="text-secondary small">0838-6724-8600</span>
+                                </div>
+                            </div>
+
+                            <div class="d-flex align-items-center">
+                                <div class="icon-circle ms-0 me-3"
+                                    style="width: 50px; height: 50px; background: rgba(239, 68, 68, 0.1);">
+                                    <i class="bi bi-geo-alt-fill text-danger fs-5"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 text-white fw-bold">Lokasi</h6>
+                                    <span class="text-secondary small">Sukoharjo, Jawa Tengah</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="glass-card card p-4 h-100">
+                        <div class="card-body">
+                            <form id="contact-form">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="contact-name" class="form-label text-secondary small">Nama
+                                            Lengkap</label>
+                                        <input type="text" class="form-control" id="contact-name"
+                                            placeholder="Nama Anda" required>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="contact-email" class="form-label text-secondary small">Alamat
+                                            Email</label>
+                                        <input type="email" class="form-control" id="contact-email"
+                                            placeholder="email@contoh.com" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="contact-subject"
+                                            class="form-label text-secondary small">Subjek</label>
+                                        <input type="text" class="form-control" id="contact-subject"
+                                            placeholder="Topik pesan" required>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="contact-message"
+                                            class="form-label text-secondary small">Pesan</label>
+                                        <textarea class="form-control" id="contact-message" rows="4"
+                                            placeholder="Tulis pesan Anda di sini..." required></textarea>
+                                    </div>
+                                    <div class="col-12 mt-4">
+                                        <button type="submit"
+                                            class="btn btn-gradient w-100 py-3 rounded-pill fw-bold">Kirim Pesan via
+                                            WhatsApp</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center py-5">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 Muhammad Iqbal Tawakkal. Dilarang menyalin tanpa izin tertulis dari pemilik.</p>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Widget -->
+    <div class="position-fixed bottom-0 end-0 m-4 z-3">
+        <div id="wa-chat-box" class="glass-card card p-3 mb-3 d-none shadow-lg"
+            style="width: 300px; border-radius: 1rem;">
+            <div class="d-flex align-items-center border-bottom pb-2 mb-2">
+                <img src="./gambar/Foto_pribadi.jpg" alt="Iqbal" class="rounded-circle me-2"
+                    style="width: 40px; height: 40px; object-fit: cover;">
+                <div>
+                    <h6 class="mb-0 text-white fw-bold">Iqbal Tawakkal</h6>
+                    <span class="text-success small"><span class="d-inline-block rounded-circle bg-success me-1"
+                            style="width: 8px; height: 8px;"></span>Online</span>
+                </div>
+            </div>
+            <p class="text-secondary small mb-3">Halo! Ada yang bisa saya bantu untuk proyek website, video editing,
+                atau penulisan Anda?</p>
+            <a href="https://wa.me/6283867248600?text=Halo%20Kak%20Iqbal%2C%20saya%20tertarik%20untuk%20bekerja%20sama."
+                target="_blank" class="btn btn-success btn-sm w-100 rounded-pill fw-bold">
+                <i class="bi bi-whatsapp me-2"></i>Mulai Obrolan
+            </a>
+        </div>
+        <button id="wa-toggle-btn"
+            class="btn btn-success rounded-circle shadow-lg d-flex align-items-center justify-content-center p-0"
+            style="width: 60px; height: 60px; font-size: 1.8rem; border: none;">
+            <i class="bi bi-whatsapp"></i>
+        </button>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+    <script>
+        // 1. WhatsApp Chat Form Redirect
+        document.getElementById('contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const name = document.getElementById('contact-name').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+            const subject = document.getElementById('contact-subject').value.trim();
+            const message = document.getElementById('contact-message').value.trim();
+
+            const phoneNumber = "6283867248600";
+            const formattedText = `Halo Kak Iqbal,\n\nSaya ingin menghubungi Anda dari website portofolio dengan detail berikut:\n\n*Nama:* ${name}\n*Email:* ${email}\n*Subjek:* ${subject}\n\n*Pesan:*\n${message}`;
+
+            const encodedText = encodeURIComponent(formattedText);
+            const waUrl = `https://wa.me/${phoneNumber}?text=${encodedText}`;
+
+            window.open(waUrl, '_blank');
+        });
+
+        // 2. WhatsApp Floating Widget Toggle
+        document.getElementById('wa-toggle-btn').addEventListener('click', function () {
+            const box = document.getElementById('wa-chat-box');
+            box.classList.toggle('d-none');
+        });
+
+        // 3. Dark/Light Mode Theme Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        // Load saved theme or default to dark
+        const currentTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+
+        themeToggleBtn.addEventListener('click', () => {
+            let theme = document.documentElement.getAttribute('data-theme');
+            let newTheme = theme === 'dark' ? 'light' : 'dark';
+
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            if (theme === 'light') {
+                themeIcon.className = 'bi bi-sun-fill';
+                themeToggleBtn.className = 'btn btn-link text-warning ms-lg-3';
+            } else {
+                themeIcon.className = 'bi bi-moon-stars';
+                themeToggleBtn.className = 'btn btn-link text-secondary ms-lg-3';
+            }
+        }
+
+        // 4. Live Wikipedia Edit Count Fetch
+        async function fetchWikiEditCount() {
+            try {
+                const response = await fetch('https://id.wikipedia.org/w/api.php?action=query&list=users&ususers=Great_achievement&usprop=editcount&format=json&origin=*');
+                const data = await response.json();
+                if (data.query && data.query.users && data.query.users[0]) {
+                    const editCount = data.query.users[0].editcount;
+                    document.getElementById('wiki-edit-count').textContent = `${Number(editCount).toLocaleString()} total suntingan di Wikipedia`;
+                } else {
+                    document.getElementById('wiki-edit-count').textContent = "Akun tidak ditemukan";
+                }
+            } catch (error) {
+                console.error("Gagal memuat statistik Wikipedia:", error);
+                document.getElementById('wiki-edit-count').textContent = "Gagal memuat rincian statistik";
+            }
+        }
+        fetchWikiEditCount();
+
+        // 5. Scroll Timeline Animation (Intersection Observer)
+        const timelineRows = document.querySelectorAll('.timeline-row');
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.remove('opacity-0', 'translate-y-3');
+                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.opacity = '1';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        timelineRows.forEach(row => {
+            observer.observe(row);
+        });
+
+        // 6. Auto-close mobile navbar menu on link click
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+        const menuToggle = document.getElementById('navbarSupportedContent');
+        if (menuToggle) {
+            navLinks.forEach((link) => {
+                link.addEventListener('click', () => {
+                    if (menuToggle.classList.contains('show')) {
+                        const bsCollapse = bootstrap.Collapse.getInstance(menuToggle) || new bootstrap.Collapse(menuToggle);
+                        bsCollapse.hide();
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
